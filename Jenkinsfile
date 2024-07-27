@@ -40,18 +40,5 @@ pipeline {
         }
       }
     }
-
-   stage('Deploying App to Kubernetes') {
-     when {
-          branch 'master'
-      }
-      steps {
-        script {
-          kubernetesDeploy(configs: "deploymentservice.yml")
-        }
-      }
-    }
-
-  }
-
+   }
 }

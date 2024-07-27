@@ -14,14 +14,6 @@ pipeline {
         git 'https://github.com/mmunta20/nodeapp_test.git'
       }
     }
-    stages {
-        stage('Build') {
-            steps {
-                echo 'Running build automation'
-                sh './gradlew build --no-daemon'
-                archiveArtifacts artifacts: 'dist/nodeapp_test.zip'
-            }
-        }
     stage('Build image') {
       steps{
         script {

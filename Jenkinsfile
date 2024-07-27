@@ -15,9 +15,6 @@ pipeline {
       }
     }
     stage('Build image') {
-      when {
-          branch 'master'
-      }
       steps{
         script {
           dockerImage = docker.build dockerimagename
@@ -29,9 +26,6 @@ pipeline {
       environment {
                registryCredential = 'dockerhublogin'
            }
-      when {
-          branch 'master'
-      }
       steps{
         script {
           docker.withRegistry( 'https://registry.hub.docker.com', registryCredential ) {
@@ -39,12 +33,9 @@ pipeline {
           }
         }
       }
-      stage('Deploying App to Kubernetes') {
-         when {
-              branch 'master'
-          }
-        steps {
-          script {
+  stage('Deploying App to Kubernetes') {
+      steps {
+        script {
               kubernetesDeploy(configs: "deploymentservice.yml")
             }
           }  
